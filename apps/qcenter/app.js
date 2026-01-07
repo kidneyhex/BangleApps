@@ -111,7 +111,7 @@ let layout = new Layout({
   remove: ()=>{
     Bangle.removeListener("swipe", onSwipe);
     Bangle.removeListener("touch", updateTimeout);
-    if (timeout) clearTimeout(timeout);
+    if (timeout) { clearTimeout(timeout); timeout = undefined; }
     delete Graphics.prototype.setFont8x12;
   }
 });
@@ -121,8 +121,8 @@ Bangle.drawWidgets();
 
 let timeout;
 const updateTimeout = function(){
-if (settings.timeout){
-    if (timeout) clearTimeout(timeout);
+  if (settings.timeout){
+    if (timeout) { clearTimeout(timeout); timeout = undefined; }
     timeout = setTimeout(Bangle.showClock,settings.timeout*1000);
   }
 };
